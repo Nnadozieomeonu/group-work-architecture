@@ -1,6 +1,5 @@
 package com.groupjn.orderservice.configuration;
 
-import com.groupjn.orderservice.interceptor.RequestResponseHandlerInterceptor;
 import com.groupjn.orderservice.interceptor.GeneralPurposeInterceptor;
 import com.groupjn.orderservice.interceptor.SinglePurposeInterceptor;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +12,6 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(final InterceptorRegistry registry) {
         registry.addInterceptor(new GeneralPurposeInterceptor()).order(1);
-        //registry.addInterceptor(new RequestResponseHandlerInterceptor());
         registry.addInterceptor(new SinglePurposeInterceptor()).addPathPatterns("/order/**").order(2);
     }
 }

@@ -1,6 +1,7 @@
 package com.groupjn.cartservice.service;
 
 import com.groupjn.cartservice.entity.Cart;
+import com.groupjn.cartservice.memento.CartItem;
 import com.groupjn.cartservice.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,21 +15,21 @@ public class CartServiceImpl implements CartService{
     private CartRepository cartRepository;
 
     @Override
-    public List<Cart> addCartbyUserIdAndProductId(int productId, int userId, int qty,double price) throws Exception{
+    public List<Cart> addCartbyUserIdAndProductId(CartItem productToCart) throws Exception{
 
         try {
-            if(cartRepository.getCartByproductIdAnduserId(userId,productId).isPresent()){
+            if(cartRepository.getCartByproductIdAnduserId(productToCart.getUserId(),productToCart.getProductId()).isPresent()){
                 throw new Exception("Product is aready in cart.");
             }
 
             Cart cart = new Cart();
-            cart.setQuantity(qty);
-            cart.setUser_id(userId);
-            cart.setProduct_id(productId);
+            cart.setQuantity(productToCart.getQty());
+            cart.setUser_id(productToCart.getUserId());
+            cart.setProduct_id(productToCart.getProductId());
             //TODO price has to be checked with quantity
-            cart.setPrice(price);
-            cartRepository.save(cart);
-            return this.getCartByUserId(userId);
+            cart.setPrice(productToCart.getPrice());
+            cart = cartRepository.save(cart);
+            return cartRepository.getCartByuserId(cart.getUser_id());
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
@@ -38,6 +39,7 @@ public class CartServiceImpl implements CartService{
     @Override
     public void updateQtyByCartId(int cartId, double price, int qty) throws Exception {
         cartRepository.updateQtyByCartId(cartId,price,qty);
+        cartRepository.flush();
     }
 
     @Override
@@ -46,8 +48,9 @@ public class CartServiceImpl implements CartService{
     }
 
     @Override
-    public List<Cart> removeCartByUserId(int cartId, int userId) {
-        cartRepository.deleteAllCartByIdUserId(cartId,userId);
+    public List<Cart> removeCartByUserId(int id, int userId) {
+        cartRepository.deleteAllCartByIdUserId(id,userId);
+        cartRepository.flush();
         return this.getCartByUserId(userId);
     }
 }

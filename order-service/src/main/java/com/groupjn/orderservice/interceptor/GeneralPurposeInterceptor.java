@@ -1,5 +1,6 @@
 package com.groupjn.orderservice.interceptor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,34 @@ public class GeneralPurposeInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String requestUri = request.getRequestURI();
+        String queryString = request.getQueryString();
+        String remoteAddress = request.getRemoteAddr();
+        String localAddress = request.getLocalAddr();
+        String localName = request.getLocalName();
+        String remoteHost = request.getRemoteHost();
+        int remotePortNumber = request.getLocalPort();
+        int localPortNumber = request.getLocalPort();
+        String remoteUser = request.getRemoteUser();
+        String method = request.getMethod();
+        String pathInfo = request.getPathInfo();
+
         LOG.info("In PreHandle method of GeneralPurposeInterceptor");
+        LOG.info("Start of Logging PreHandle Request info" +
+                " \n -------------------------------------------------------------------- \n" +
+                "Request URI "+requestUri+"\n" +
+                "Query String "+queryString+"\n" +
+                "Remote Address "+remoteAddress+"\n" +
+                "Local Address "+localAddress+"\n" +
+                "Local name "+localName+"\n" +
+                "RemoteHost Host "+remoteHost+"\n" +
+                "Remote Port Number "+remotePortNumber+"\n" +
+                "Local Port Number "+localPortNumber+"\n" +
+                "Remote User "+remoteUser+"\n" +
+                "Request Method "+method+"\n" +
+                "Request Path Info "+pathInfo+"\n" +
+                "End of Logging PreHandle Request info \n" +
+                "-------------------------------------------------------------------- \n");
         return true;
     }
 

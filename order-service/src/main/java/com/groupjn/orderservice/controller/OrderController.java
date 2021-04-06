@@ -6,6 +6,8 @@ import com.groupjn.orderservice.common.TransactionRequest;
 import com.groupjn.orderservice.common.TransactionResponse;
 import com.groupjn.orderservice.entity.Order;
 import com.groupjn.orderservice.service.OrderService;
+import com.groupjn.orderservice.template.UserNotificatonMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,17 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/order")
+@Slf4j
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
     @PostMapping("/bookOrder")
-    public TransactionResponse boolOrder(@RequestBody TransactionRequest transactionRequest) throws JsonProcessingException {
+    public TransactionResponse bookOrder(@RequestBody TransactionRequest transactionRequest) throws JsonProcessingException {
 
+        String header = "User";
+        String message = "Your order has been placed see below order details \n" +
+                ""+transactionRequest.getOrder().toString();
+        UserNotificatonMessage userNotificatonMessage = new UserNotificatonMessage(header,message);
+        log.info(userNotificatonMessage.buildNotification());
         return orderService.saveOrder(transactionRequest);
-
-        //do a rest call to payment gateway and pass the order id
     }
 
 
