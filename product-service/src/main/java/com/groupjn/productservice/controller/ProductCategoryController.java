@@ -22,9 +22,9 @@ public class ProductCategoryController {
     private CategoryRepository categoryRepository;
 
     @PostMapping("/addCategory")
-    public void addCategory(@RequestBody String name, @RequestBody String description) {
+    public Category addCategory(@RequestBody String name, @RequestBody String description) {
         CategoryClass category  = new CategoryBuilder(name).description(description).build();
-        return categoryRepository.save(new Category(category.getName(),category.getDescription());
+        return categoryRepository.save(new Category(category.getName(),category.getDescription()));
     }
 
 
