@@ -110,12 +110,9 @@ public class CartController {
         }
     }
 
-    public void writeLine(ShoppingCart shoppingCart)
-    {
-        for(CartItem cartItem: shoppingCart.get_cartItems()){
-            System.out.println("Price: "+ cartItem.getPrice()+", Product Id: "+cartItem.getProductId()+", Quantity: "+cartItem.getQty()+", User Id: "+cartItem.getUserId());
-        }
-    }
+
+
+
 
     public List<CartItem> convertCartToCartListItems(List<Cart> cart){
         List<CartItem> ci = new ArrayList<>();
@@ -138,6 +135,13 @@ public class CartController {
                 cart.getUser_id(),
                 cart.getPrice(),
                 cart.getQuantity());
+    }
+
+    public void writeLine(ShoppingCart shoppingCart)
+    {
+        for(CartItem cartItem: shoppingCart.get_cartItems()){
+            System.out.println("Price: "+ cartItem.getPrice()+", Product Id: "+cartItem.getProductId()+", Quantity: "+cartItem.getQty()+", User Id: "+cartItem.getUserId());
+        }
     }
 
 

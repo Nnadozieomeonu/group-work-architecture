@@ -15,7 +15,6 @@ import javax.persistence.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Category {
     @Id
     @GeneratedValue
@@ -24,5 +23,10 @@ public class Category {
     public String name;
 
     public String description;
+
+    public Category(String name, String description){
+        this.name = name;
+        this.description = description;
+    }
 
 }

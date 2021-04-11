@@ -1,6 +1,8 @@
 package com.groupjn.orderservice.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.groupjn.orderservice.builder.Email;
+import com.groupjn.orderservice.builder.EmailBuilder;
 import com.groupjn.orderservice.common.Payment;
 import com.groupjn.orderservice.common.TransactionRequest;
 import com.groupjn.orderservice.common.TransactionResponse;
@@ -29,7 +31,14 @@ public class OrderController {
         String message = "Your order has been placed see below order details \n" +
                 ""+transactionRequest.getOrder().toString();
         UserNotificatonMessage userNotificatonMessage = new UserNotificatonMessage(header,message);
-        log.info(userNotificatonMessage.buildNotification());
+        Email email = new EmailBuilder()
+                .addRecipient("john@Doe.com")
+                .setMainText(userNotificatonMessage.buildNotification())
+                .setGreeting("Hi John!")
+                .setClosing("Regards")
+                .setTitle("Builder pattern resources")
+                .build();
+        email.send();
         return orderService.saveOrder(transactionRequest);
     }
 

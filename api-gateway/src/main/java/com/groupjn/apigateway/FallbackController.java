@@ -38,6 +38,14 @@ public class FallbackController {
                 " or is down, Please try again later");
     }
 
+    @RequestMapping("/userFallBack")
+    public Mono<String> userServiceFallBack(){
+        return Mono.just("User Service is taking too long to respond" +
+                " or is down, Please try again later");
+    }
+
+
+
 
 
 }
