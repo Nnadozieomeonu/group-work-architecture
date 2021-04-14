@@ -14,3 +14,7 @@ security:
     client:
       client-id: mobile
       client-secret: pin
+
+axon:
+  axonserver:
+    servers: "${AXONSERVER_HOSTNAME}:8124"

@@ -10,4 +10,13 @@ class PaymentServiceApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void doPaymentTest(){
+		// @Todo process payment test
+	}
+
+	@Test
+	void getPaymentByorderId(){
+		// @Todo get payment by order id
+	}
 }

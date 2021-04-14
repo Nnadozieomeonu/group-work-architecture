@@ -35,11 +35,6 @@ public class UserController {
 
     }
 
-    @GetMapping("/test")
-    public String test(){
-        return "test";
-    }
-
     @GetMapping("/allUser")
     public List<User> users(){
         return repository.findAll();

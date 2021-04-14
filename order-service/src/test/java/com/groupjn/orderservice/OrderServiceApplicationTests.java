@@ -10,4 +10,14 @@ class OrderServiceApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void bookOrderTest(){
+		// @Todo book order test
+	}
+
+	@Test
+	void removeProductFromCartTest(){
+		// @Todo remove product from cart test
+	}
+
 }

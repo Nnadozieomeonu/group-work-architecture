@@ -10,4 +10,15 @@ class UserServiceApplicationTests {
 	void contextLoads() {
 	}
 
+
+	@Test
+	void createUserTest(){
+		// @Todo Add Create user test
+	}
+
+	@Test
+	void viewUserTest() {
+		// @Todo View user test
+	}
+
 }

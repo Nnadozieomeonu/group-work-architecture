@@ -10,4 +10,13 @@ class ProductServiceApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void createProductTest(){
+		// @Todo create product test
+	}
+
+	@Test
+	void viewProductTest(){
+		// @Todo view product Test
+	}
 }
